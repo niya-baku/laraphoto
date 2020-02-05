@@ -13,15 +13,13 @@ class Photo extends Model
 
     /** JSONに含める属性 */
     protected $visible = [
-        'id', 'owner', 'url',
+        'id', 'owner', 'url', 'comments',
     ];
 
     /** JSONに含める属性 */
     protected $appends = [
         'url',
     ];
-
-    protected $perPage = 9;
 
     /** IDの桁数 */
     const ID_LENGTH = 12;
@@ -64,6 +62,16 @@ class Photo extends Model
 
         return $id;
     }
+
+    /**
+     * アクセサ - url
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return Storage::cloud()->url($this->attributes['filename']);
+    }
+
     /**
      * リレーションシップ - usersテーブル
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -72,12 +80,13 @@ class Photo extends Model
     {
         return $this->belongsTo('App\User', 'user_id', 'id', 'users');
     }
+
     /**
-     * アクセサ - url
-     * @return string
+     * リレーションシップ - commentsテーブル
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function getUrlAttribute()
+    public function comments()
     {
-        return Storage::cloud()->url($this->attributes['filename']);
+        return $this->hasMany('App\Comment')->orderBy('id', 'desc');
     }
 }
