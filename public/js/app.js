@@ -3087,7 +3087,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("api/photos/?page=".concat(this.page));
+                return axios.get("/api/photos", {
+                  params: {
+                    // ここにクエリパラメータを指定する
+                    page: this.page // このようにパラメータを付けるとhttpsになる
+
+                  }
+                });
 
               case 2:
                 response = _context.sent;
