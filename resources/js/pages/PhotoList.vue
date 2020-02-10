@@ -39,14 +39,7 @@ export default {
   },
   methods: {
     async fetchPhotos () {
-      //const response = await axios.get(`/api/photos/?page=${this.page}`)
-      const response = await axios.get(`/api/photos`,
-        {
-          params: {
-          // ここにクエリパラメータを指定する
-            page: this.page // このようにパラメータを付けるとhttpsになる
-          }
-        },
+      const response = await axios.get(`api/photos/?page=${this.page}`)
 
       if (response.status !== OK) {
         this.$store.commit('error/setCode', response.status)
