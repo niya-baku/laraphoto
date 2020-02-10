@@ -46,7 +46,7 @@ export default {
           // ここにクエリパラメータを指定する
             page: this.page // このようにパラメータを付けるとhttpsになる
           }
-        }
+        },
 
       if (response.status !== OK) {
         this.$store.commit('error/setCode', response.status)
