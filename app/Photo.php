@@ -23,7 +23,7 @@ class Photo extends Model
     ];
 
     /** IDの桁数 */
-    const ID_LENGTH = 12;
+    const ID_LENGTH = 9;
 
     public function __construct(array $attributes = [])
     {
